@@ -1,22 +1,32 @@
-from time import sleep
+import numpy as np # linear algebra
 import cv2
-import os
+from matplotlib import pyplot as plt
 
-for dir in os.listdir('data/test'):
-    for f in dir:
-       pass
+#----------------create our detector---------------
+img = cv2.imread('../input/data-for-knn/data/train/airplane/0000.jpg')
+plt.imshow(img)
+plt.show()
+gray = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
 
-image = cv2.imread('data/test/0000.jpg')
-cv2.imshow(image)
-window_name = 'image'
-  
-# Using cv2.imshow() method 
-# Displaying the image 
-cv2.imshow('', image)
-  
-#waits for user to press any key 
-#(this is necessary to avoid Python kernel form crashing)
-cv2.waitKey(0) 
-  
-#closing all open windows 
-cv2.destroyAllWindows() 
+#create sift detector
+sift = cv2.SIFT_create()
+#finds th keypoints in images
+kp = sift.detect(gray,None)
+
+#this function draws the small circules on location of keypoints
+img =  cv2.drawKeypoints(gray,kp,img)
+plt.imshow(img)
+plt.show()
+
+#draw a circle with size of keypoint and it will even show its orientation
+img=cv2.drawKeypoints(gray,kp,img,flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+plt.imshow(img)
+plt.show()
+
+#-------------------create our descripteur--------------------
+#mmethode 1: if we already have key-point kp
+desc = sift.compute(gray,kp)
+print(desc)
+#methode 2: detect and compute in sametime
+kp, des = sift.detectAndCompute(gray,None)
+des
