@@ -29,4 +29,8 @@ desc = sift.compute(gray,kp)
 print(desc)
 #methode 2: detect and compute in sametime
 kp, des = sift.detectAndCompute(gray,None)
+<<<<<<< HEAD
 des
+=======
+des
+>>>>>>> 846dac666e48688962a4da693de482e3ecee65d1
