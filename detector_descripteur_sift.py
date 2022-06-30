@@ -3,7 +3,7 @@ import cv2
 from matplotlib import pyplot as plt
 
 #----------------create our detector---------------
-img = cv2.imread('../input/data-for-knn/data/train/airplane/0000.jpg')
+img = cv2.imread('data-for-knn/data/train/airplane/0000.jpg')
 plt.imshow(img)
 plt.show()
 gray = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)
